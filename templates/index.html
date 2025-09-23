@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ignacio y Lucía - Nuestra Boda</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --color-primary: #f8e9e9;
+            --color-secondary: #d4a5a5;
+            --color-accent: #b87c7c;
+            --color-dark: #5d4037;
+            --color-light: #fff9f9;
+            --font-heading: 'Dancing Script', cursive;
+            --font-subheading: 'Playfair Display', serif;
+            --font-body: 'Raleway', sans-serif;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--color-dark);
+            background-color: var(--color-light);
+            line-height: 1.6;
+        }
+        
+        /* Header y Navegación */
+        header {
+            background: linear-gradient(rgba(93, 64, 55, 0.7), rgba(93, 64, 55, 0.7)), 
+                        url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+            position: relative;
+        }
+        
+        .couple-names {
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        .wedding-date {
+            font-family: var(--font-subheading);
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            letter-spacing: 3px;
+        }
+        
+        .nav-container {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            color: var(--color-accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--color-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* Secciones generales */
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--color-accent);
+        }
+        
+        /* Cuenta regresiva */
+        #countdown {
+            background-color: var(--color-primary);
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .countdown-item {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            min-width: 120px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--color-accent);
+            display: block;
+        }
+        
+        .countdown-label {
+            font-size: 1rem;
+            color: var(--color-dark);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Nuestra historia */
+        #our-story {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .story-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 3rem;
+        }
+        
+        .story-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .story-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .story-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        /* Detalles de la boda */
+        #wedding-details {
+            background-color: var(--color-primary);
+        }
+        
+        .details-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            justify-content: center;
+        }
+        
+        .detail-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .detail-icon {
+            font-size: 2.5rem;
+            color: var(--color-accent);
+            margin-bottom: 1rem;
+        }
+        
+        .detail-title {
+            font-family: var(--font-subheading);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--color-dark);
+        }
+        
+        /* Libro de firmas */
+        #guestbook {
+            text-align: center;
+        }
+        
+        .guestbook-form {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: var(--font-body);
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: var(--color-accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            border-radius: 5px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: var(--color-dark);
+        }
+        
+        .guestbook-entries {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .guestbook-entry {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+        
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+        
+        .entry-name {
+            font-weight: bold;
+            color: var(--color-accent);
+        }
+        
+        .entry-date {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .couple-names {
+                font-size: 3rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <div class="nav-container">
+        <nav>
+            <div class="logo">I & L</div>
+            <ul class="nav-links">
+                <li><a href="#countdown">Cuenta Regresiva</a></li>
+                <li><a href="#our-story">Nuestra Historia</a></li>
+                <li><a href="#wedding-details">Detalles</a></li>
+                <li><a href="#guestbook">Libro de Firmas</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <h1 class="couple-names">Ignacio & Lucía</h1>
+        <p class="wedding-date">9 de Octubre, 2027</p>
+        <h3>¡Nos casamos!</h3>
+    </header>
+
+    <!-- Cuenta Regresiva -->
+    <section id="countdown">
+        <h2 class="section-title">Cuenta Regresiva</h2>
+        <div class="countdown-container">
+            <div class="countdown-item">
+                <span class="countdown-number" id="days">00</span>
+                <span class="countdown-label">Días</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="hours">00</span>
+                <span class="countdown-label">Horas</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="minutes">00</span>
+                <span class="countdown-label">Minutos</span>
+            </div>
+            <div class="countdown-item">
+                <span class="countdown-number" id="seconds">00</span>
+                <span class="countdown-label">Segundos</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Nuestra Historia -->
+    <section id="our-story">
+        <h2 class="section-title">Nuestra Historia</h2>
+        <div class="story-content">
+            <div class="story-text">
+                <p>Hace ya algunos años, en vísperas del Carnaval, el destino nos cruzó de manera inesperada. Sin buscarlo, sin planearlo, nos encontramos y descubrimos en el otro aquello que nunca imaginamos: nuestro TODO, nuestro refugio, nuestro hogar repentino.
+Lo que empezó como una simple conversación y encuentros casuales, pronto se transformó en una conexión profunda y única, capaz de cambiar para siempre el rumbo de nuestras vidas.</p>
+                <p>Tras XXX años de compartir sueños, risas y aventuras, Ignacio me sorprendió con la más hermosa de las promesas: una propuesta de matrimonio en un viaje inolvidable a Almuñécar, frente al mar y bajo la magia de un atardecer que parecía escrito para nosotros. Fue, sin duda, el instante más mágico de nuestra historia.
+
+Hoy, con la misma ilusión y amor que nos unió aquel primer día, queremos compartir nuestra felicidad con todos ustedes.</p>
+            </div>
+        <div class="story-image">
+            <!-- Carrusel Bootstrap 5 -->
+            <div id="storyCarousel" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicadores (puntos inferiores) -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#storyCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#storyCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#storyCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <!-- Imágenes del carrusel -->
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Ana y Carlos sonriendo">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="ruta/a/tu-segunda-foto.jpg" class="d-block w-100" alt="La propuesta de matrimonio">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="ruta/a/tercera-foto.jpg" class="d-block w-100" alt="Viaje a Almuñécar">
+                    </div>
+                </div>
+                <!-- Botones de anterior/siguiente -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#storyCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#storyCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Detalles de la Boda -->
+    <section id="wedding-details">
+        <h2 class="section-title">Detalles de la Boda</h2>
+        <div class="details-container">
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <i class="fas fa-church"></i>
+                </div>
+                <h3 class="detail-title">Ceremonia</h3>
+                <p>Iglesia Nuestra Señora de la Natividad</p>
+                <p>12:00 horas</p>
+                <p>Calle Iglesia, Jamilena</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <i class="fas fa-glass-cheers"></i>
+                </div>
+                <h3 class="detail-title">Recepción</h3>
+                <p>Salones María Luisa</p>
+                <p>14:00 horas</p>
+                <p>Ctra. Córdoba. Torredonjimeno</p>
+            </div>
+            <div class="detail-card">
+                <div class="detail-icon">
+                    <i class="fas fa-ring"></i>
+                </div>
+                <h3 class="detail-title">Confima tu asistencia</h3>
+                <p>Ignacio;</p>
+                <p style="margin: 5px 0; color: #555;">
+                    <i class="fas fa-phone-alt" style="color: #28a745; margin-right: 8px;"></i> 678 022 642
+                </p>
+                <p>Lucía;</p>
+                <p style="margin: 5px 0; color: #555;">
+                    <i class="fas fa-phone-alt" style="color: #28a745; margin-right: 8px;"></i> 678 073 149
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Libro de Firmas -->
+    <section id="guestbook">
+        <h2 class="section-title">Libro de Firmas</h2>
+        <p>Deja un mensaje especial para los novios</p>
+        
+        <form class="guestbook-form" action="/agregar-mensaje" method="POST">
+            <div class="form-group">
+                <label for="name">Tu nombre</label>
+                <input type="text" id="name" name="nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Tu mensaje</label>
+                <textarea id="message" name="mensaje" required></textarea>
+            </div>
+            <button type="submit">Enviar Mensaje</button>
+        </form>
+        
+        <div class="guestbook-entries">
+            {% if mensajes %}
+                {% for mensaje in mensajes %}
+                <div class="guestbook-entry">
+                    <div class="entry-header">
+                        <span class="entry-name">{{ mensaje.nombre }}</span>
+                        <span class="entry-date">{{ mensaje.fecha }}</span>
+                    </div>
+                    <div class="entry-message">{{ mensaje.mensaje }}</div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p>No hay mensajes aún. ¡Sé el primero en dejar un mensaje!</p>
+            {% endif %}
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Con amor, Ignacio y Lucía</p>
+        <p>9 de Octubre, 2027</p>
+    </footer>
+
+    <script>
+        // Cuenta regresiva
+        function updateCountdown() {
+            const weddingDate = new Date('October 9, 2027 16:00:00').getTime();
+            const now = new Date().getTime();
+            const timeLeft = weddingDate - now;
+            
+            const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+            
+            document.getElementById('days').textContent = days < 10 ? '0' + days : days;
+            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
+            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
+            
+            if (timeLeft < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById('countdown').innerHTML = '<h2 class="section-title">¡Hoy es el gran día!</h2>';
+            }
+        }
+        
+        const countdownInterval = setInterval(updateCountdown, 1000);
+        updateCountdown(); // Ejecutar inmediatamente al cargar
+                
+        // Navegación suave
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
