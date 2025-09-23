@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, jsonify
+from datetime import datetime, timedelta
 import csv
 import os
 from datetime import datetime
@@ -29,11 +30,14 @@ def guardar_mensaje(nombre, mensaje):
         
         if not archivo_existe:
             escritor.writeheader()
+            
+        # Agregar 2 horas a la hora actual
+        fecha_actualizada = datetime.now() + timedelta(hours=2)
         
         escritor.writerow({
             'nombre': nombre,
             'mensaje': mensaje,
-            'fecha': datetime.now().strftime('%d/%m/%Y %H:%M:%S')
+            'fecha': fecha_actualizada.strftime('%d/%m/%Y - %H:%M:%S')
         })
 
 @app.route('/')
