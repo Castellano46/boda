@@ -123,7 +123,7 @@
                 <p>14:00 horas</p>
                 <p>Ctra. Córdoba. Torredonjimeno</p>
             </div>
-            
+
             <div class="detail-card">
                 <div class="detail-icon">
                     <i class="fas fa-ring"></i>
@@ -229,6 +229,39 @@
                         top: targetElement.offsetTop - 80,
                         behavior: 'smooth'
                     });
+                }
+            });
+        });
+
+        // Funcionalidad para borrar mensajes
+        document.querySelectorAll('.entry-name').forEach(nameElement => {
+            nameElement.style.cursor = 'pointer'; // Indica que es clickable
+            nameElement.addEventListener('click', function() {
+                const entry = this.closest('.guestbook-entry');
+                let deleteLink = entry.querySelector('.delete-link');
+
+                // Si el enlace de borrado ya existe, lo quitamos. Si no, lo creamos.
+                if (deleteLink) {
+                    deleteLink.remove();
+                } else {
+                    deleteLink = document.createElement('a');
+                    deleteLink.href = '#';
+                    deleteLink.className = 'delete-link';
+                    deleteLink.textContent = ' [Borrar]';
+                    deleteLink.style.color = '#ff6b6b';
+                    deleteLink.style.marginLeft = '10px';
+                    deleteLink.style.fontSize = '0.8em';
+
+                    // Preguntar confirmación antes de borrar
+                    deleteLink.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        if (confirm('¿Estás seguro de que quieres borrar este mensaje?')) {
+                            const nombre = entry.querySelector('.entry-name').textContent;
+                            window.location.href = `/borrar-mensaje?nombre=${encodeURIComponent(nombre)}`;
+                        }
+                    });
+
+                    this.appendChild(deleteLink);
                 }
             });
         });

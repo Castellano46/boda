@@ -59,5 +59,23 @@ def agregar_mensaje():
     
     return redirect('/')
 
+@app.route('/borrar-mensaje')
+def borrar_mensaje():
+    """Borra un mensaje específico basándose en el nombre del autor"""
+    nombre_a_borrar = request.args.get('nombre')
+    mensajes = leer_mensajes()
+
+    # Filtrar la lista, manteniendo todos los mensajes EXCEPTO el que coincide con el nombre
+    mensajes_actualizados = [m for m in mensajes if m['nombre'] != nombre_a_borrar]
+
+    # Reescribir el archivo CSV completo con la lista actualizada
+    with open(ARCHIVO_MENSAJES, 'w', newline='', encoding='utf-8') as archivo:
+        campos = ['nombre', 'mensaje', 'fecha']
+        escritor = csv.DictWriter(archivo, fieldnames=campos)
+        escritor.writeheader()
+        escritor.writerows(mensajes_actualizados)
+
+    return redirect('/')
+
 if __name__ == '__main__':
     app.run(debug=True)
