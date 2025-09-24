@@ -1,0 +1,583 @@
+:root {
+    --color-primary: #f8e9e9;
+    --color-secondary: #d4a5a5;
+    --color-accent: #b87c7c;
+    --color-dark: #5d4037;
+    --color-light: #fff9f9;
+    --font-heading: 'Dancing Script', cursive;
+    --font-subheading: 'Playfair Display', serif;
+    --font-body: 'Raleway', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-body);
+    color: var(--color-dark);
+    background-color: var(--color-light);
+    line-height: 1.6;
+}
+
+/* Header y Navegación */
+header {
+    background: linear-gradient(rgba(93, 64, 55, 0.7), rgba(93, 64, 55, 0.7)), 
+                url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    position: relative;
+}
+
+.couple-names {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.wedding-date {
+    font-family: var(--font-subheading);
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    letter-spacing: 3px;
+}
+
+.nav-container {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.95);
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    color: var(--color-accent);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+}
+
+.nav-links li {
+    margin-left: 2rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--color-dark);
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--color-accent);
+}
+
+/* Secciones generales */
+section {
+    padding: 5rem 5%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--color-accent);
+}
+
+/* Cuenta regresiva */
+#countdown {
+    background-color: var(--color-primary);
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.countdown-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.countdown-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    min-width: 120px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.countdown-number {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-accent);
+    display: block;
+}
+
+.countdown-label {
+    font-size: 1rem;
+    color: var(--color-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Nuestra historia */
+#our-story {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.story-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.story-text {
+    flex: 1;
+    min-width: 300px;
+}
+
+.story-image {
+    flex: 1;
+    min-width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.story-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Detalles de la boda - Versión Profesional */
+#wedding-details {
+    background-color: var(--color-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+#wedding-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+}
+
+.details-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.detail-card {
+    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    box-shadow: 
+        0 10px 30px rgba(184, 124, 124, 0.1),
+        0 2px 10px rgba(184, 124, 124, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(10px);
+}
+
+.detail-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.6s;
+}
+
+.detail-card:hover::before {
+    left: 100%;
+}
+
+.detail-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 
+        0 20px 40px rgba(184, 124, 124, 0.15),
+        0 5px 15px rgba(184, 124, 124, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.detail-icon {
+    font-size: 3rem;
+    color: var(--color-accent);
+    margin-bottom: 1.5rem;
+    background: linear-gradient(135deg, var(--color-accent), var(--color-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 5px rgba(184, 124, 124, 0.3));
+    transition: all 0.3s ease;
+}
+
+.detail-card:hover .detail-icon {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 4px 8px rgba(184, 124, 124, 0.4));
+}
+
+.detail-title {
+    font-family: var(--font-subheading);
+    font-size: 1.6rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-dark);
+    font-weight: 700;
+    position: relative;
+    padding-bottom: 0.8rem;
+}
+
+.detail-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--color-accent), var(--color-secondary));
+    border-radius: 2px;
+}
+
+.detail-card p {
+    margin-bottom: 0.8rem;
+    color: #666;
+    line-height: 1.6;
+    font-size: 1rem;
+    position: relative;
+    padding-left: 1.5rem;
+    text-align: left;
+}
+
+.detail-card p::before {
+    content: '•';
+    color: var(--color-accent);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.detail-card p:last-child {
+    margin-bottom: 0;
+}
+
+/* Estilos específicos para la card de confirmación */
+.detail-card:nth-child(3) {
+    background: linear-gradient(135deg, #fff9f9 0%, #f8e9e9 100%);
+    border: 1px solid rgba(184, 124, 124, 0.2);
+}
+
+.detail-card:nth-child(3) .detail-icon {
+    background: linear-gradient(135deg, var(--color-accent), var(--color-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Estilos específicos para la card de confirmación compacta */
+.contact-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0.8rem 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 10px;
+    border: 1px solid rgba(184, 124, 124, 0.1);
+    transition: all 0.3s ease;
+}
+
+.contact-line:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateX(5px);
+    box-shadow: 0 2px 8px rgba(184, 124, 124, 0.1);
+}
+
+.contact-line:last-child {
+    margin-bottom: 0;
+}
+
+.contact-name {
+    font-weight: 600;
+    color: var(--color-dark);
+    font-size: 0.95rem;
+    min-width: 80px;
+}
+
+.phone-complete {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.phone-text {
+    color: #555;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.phone-icon {
+    color: #28a745;
+    font-size: 0.9rem;
+    width: 16px;
+    text-align: center;
+}
+
+.contact-info,
+.contact-person {
+    display: none;
+}
+
+.phone-number {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    padding-left: 0;
+    color: #555;
+}
+
+.phone-number::before {
+    display: none; 
+}
+
+.phone-icon {
+    color: #28a745;
+    margin-right: 10px;
+    font-size: 1.1rem;
+    width: 20px;
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .details-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .detail-card {
+        padding: 2rem 1.5rem;
+        margin: 0 1rem;
+    }
+    
+    .detail-card:hover {
+        transform: translateY(-5px);
+    }
+}
+
+/* Libro de firmas */
+#guestbook {
+    text-align: center;
+}
+
+.guestbook-form {
+    max-width: 600px;
+    margin: 0 auto 3rem;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-family: var(--font-body);
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button {
+    background-color: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 5px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--color-dark);
+}
+
+.guestbook-entries {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.guestbook-entry {
+    background-color: white;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    height: fit-content;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.guestbook-entry:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.entry-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 0.5rem;
+    flex-shrink: 0;
+}
+
+.entry-name {
+    font-weight: bold;
+    color: var(--color-accent);
+    font-size: 1.1rem;
+}
+
+.entry-date {
+    color: #888;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.entry-message {
+    flex-grow: 1;
+    line-height: 1.5;
+    color: var(--color-dark);
+}
+
+/* Mensaje cuando no hay mensajes */
+.guestbook-entries > p {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 2rem;
+    color: #666;
+    font-style: italic;
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-dark);
+    color: white;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .couple-names {
+        font-size: 3rem;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .mobile-menu {
+        display: block;
+    }
+    
+    .section-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* Responsive para el grid de mensajes */
+@media (max-width: 1024px) {
+    .guestbook-entries {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .guestbook-entries {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .guestbook-entry {
+        min-height: auto;
+    }
+    
+    .entry-header {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .entry-date {
+        text-align: left;
+    }
+}
