@@ -59,23 +59,32 @@ def agregar_mensaje():
     
     return redirect('/')
 
-@app.route('/borrar-mensaje')
+@app.route('/borrar-mensaje', methods=['POST']) 
 def borrar_mensaje():
     """Borra un mensaje específico basándose en el nombre del autor"""
-    nombre_a_borrar = request.args.get('nombre')
-    mensajes = leer_mensajes()
+    try:
+        nombre_a_borrar = request.form.get('nombre') 
+        if not nombre_a_borrar:
+            return redirect('/')
+            
+        mensajes = leer_mensajes()
 
-    # Filtrar la lista, manteniendo todos los mensajes EXCEPTO el que coincide con el nombre
-    mensajes_actualizados = [m for m in mensajes if m['nombre'] != nombre_a_borrar]
+        # Filtrar los mensajes manteniendo solo los que NO coinciden
+        mensajes_actualizados = [m for m in mensajes if m['nombre'] != nombre_a_borrar]
 
-    # Reescribir el archivo CSV completo con la lista actualizada
-    with open(ARCHIVO_MENSAJES, 'w', newline='', encoding='utf-8') as archivo:
-        campos = ['nombre', 'mensaje', 'fecha']
-        escritor = csv.DictWriter(archivo, fieldnames=campos)
-        escritor.writeheader()
-        escritor.writerows(mensajes_actualizados)
+        # Solo reescribir si hubo cambios
+        if len(mensajes_actualizados) < len(mensajes):
+            with open(ARCHIVO_MENSAJES, 'w', newline='', encoding='utf-8') as archivo:
+                campos = ['nombre', 'mensaje', 'fecha']
+                escritor = csv.DictWriter(archivo, fieldnames=campos)
+                escritor.writeheader()
+                escritor.writerows(mensajes_actualizados)
 
-    return redirect('/')
+        return redirect('/')
+    
+    except Exception as e:
+        print(f"Error al borrar mensaje: {e}")
+        return redirect('/')
 
 if __name__ == '__main__':
     app.run(debug=True)

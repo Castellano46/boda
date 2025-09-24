@@ -233,14 +233,24 @@
             });
         });
 
-        // Funcionalidad para borrar mensajes
+       // Funcionalidad para borrar mensajes
         document.querySelectorAll('.entry-name').forEach(nameElement => {
-            nameElement.style.cursor = 'pointer'; // Indica que es clickable
-            nameElement.addEventListener('click', function() {
+            nameElement.style.cursor = 'pointer';
+            
+            nameElement.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevenir que el evento se propague al document
+                
                 const entry = this.closest('.guestbook-entry');
                 let deleteLink = entry.querySelector('.delete-link');
+                const nombre = this.textContent.trim();
 
-                // Si el enlace de borrado ya existe, lo quitamos. Si no, lo creamos.
+                // Ocultar todos los demás enlaces de borrado primero
+                document.querySelectorAll('.delete-link').forEach(link => {
+                    if (link !== deleteLink) {
+                        link.remove();
+                    }
+                });
+
                 if (deleteLink) {
                     deleteLink.remove();
                 } else {
@@ -252,12 +262,23 @@
                     deleteLink.style.marginLeft = '10px';
                     deleteLink.style.fontSize = '0.8em';
 
-                    // Preguntar confirmación antes de borrar
                     deleteLink.addEventListener('click', function(e) {
                         e.preventDefault();
+                        e.stopPropagation();
+                        
                         if (confirm('¿Estás seguro de que quieres borrar este mensaje?')) {
-                            const nombre = entry.querySelector('.entry-name').textContent;
-                            window.location.href = `/borrar-mensaje?nombre=${encodeURIComponent(nombre)}`;
+                            const form = document.createElement('form');
+                            form.method = 'POST';
+                            form.action = '/borrar-mensaje';
+
+                            const input = document.createElement('input');
+                            input.type = 'hidden';
+                            input.name = 'nombre';
+                            input.value = nombre;
+
+                            form.appendChild(input);
+                            document.body.appendChild(form);
+                            form.submit();
                         }
                     });
 
@@ -266,6 +287,25 @@
             });
         });
 
+        // Event listener para cerrar los enlaces de borrado al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            // Si el clic NO fue en un elemento .entry-name o .delete-link
+            if (!e.target.closest('.entry-name') && !e.target.closest('.delete-link')) {
+                // Ocultar todos los enlaces de borrado
+                document.querySelectorAll('.delete-link').forEach(link => {
+                    link.remove();
+                });
+            }
+        });
+
+        // También cerrar al presionar la tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.delete-link').forEach(link => {
+                    link.remove();
+                });
+            }
+        });
     </script>
 </body>
 </html>
