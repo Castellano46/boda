@@ -209,7 +209,7 @@ section {
 }
 
 .detail-card {
-    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
+    background: linear-gradient(135deg, #fff9f9 0%, #f8e9e9 100%);
     border-radius: 20px;
     padding: 2.5rem 2rem;
     text-align: center;
