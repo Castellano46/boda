@@ -908,3 +908,146 @@ footer {
         gap: 1rem;
     }
 }
+
+/* Estilos para el carrusel clickeable */
+.carousel-clickable {
+    cursor: pointer;
+    position: relative;
+}
+
+.carousel-clickable .carousel-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.carousel-clickable .carousel-item:hover .carousel-overlay {
+    opacity: 1;
+}
+
+.carousel-overlay i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.carousel-overlay span {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+/* Estilos para el modal de imágenes */
+.modal-content {
+    background: transparent;
+    border: none;
+}
+
+.modal-header {
+    background: rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+    opacity: 0.8;
+}
+
+.modal-header .btn-close:hover {
+    opacity: 1;
+}
+
+.modal-body {
+    padding: 0;
+    background: rgba(0, 0, 0, 0.9);
+}
+
+#modalCarousel {
+    max-height: 85vh;
+}
+
+#modalCarousel .carousel-item img {
+    max-height: 85vh;
+    object-fit: contain;
+    width: auto;
+    margin: 0 auto;
+}
+
+#modalCarousel .carousel-control-prev,
+#modalCarousel .carousel-control-next {
+    width: 10%;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+#modalCarousel .carousel-control-prev:hover,
+#modalCarousel .carousel-control-next:hover {
+    opacity: 1;
+}
+
+/* Asegurar que el modal ocupe toda la pantalla en móviles */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 0;
+        max-width: 100%;
+        height: 100%;
+    }
+    
+    .modal-content {
+        height: 100%;
+        border-radius: 0;
+    }
+    
+    .modal-header {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        background: rgba(0, 0, 0, 0.8);
+    }
+    
+    .modal-body {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    #modalCarousel {
+        width: 100%;
+        height: 100%;
+    }
+    
+    #modalCarousel .carousel-item img {
+        max-height: 100vh;
+        max-width: 100%;
+    }
+}
+
+/* Mejoras para tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    #modalCarousel .carousel-item img {
+        max-height: 80vh;
+    }
+}
