@@ -481,15 +481,23 @@
     // Función para abrir el modal con una imagen específica
     function openModalWithImage(imageIndex) {
         const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-        
-        // Mostrar el modal
         modal.show();
-        
-        // Cuando el modal se muestre, ir a la imagen correcta
+
         document.getElementById('imageModal').addEventListener('shown.bs.modal', function() {
             const modalCarousel = new bootstrap.Carousel(document.getElementById('modalCarousel'));
             modalCarousel.to(imageIndex);
-        }, { once: true }); // El evento se ejecutará solo una vez
+            centerModalImage(); // Centrar al abrir
+
+            // Añadir event listeners para cambios
+            window.addEventListener('orientationchange', centerModalImage);
+            window.addEventListener('resize', centerModalImage);
+        }, { once: true });
+
+        // Limpiar event listeners al cerrar el modal
+        document.getElementById('imageModal').addEventListener('hidden.bs.modal', function() {
+            window.removeEventListener('orientationchange', centerModalImage);
+            window.removeEventListener('resize', centerModalImage);
+        }, { once: true });
     }
 
     // Inicializar el modal cuando la página cargue
@@ -530,22 +538,38 @@
 
     // Función para centrar la imagen modal
     function centerModalImage() {
-    const activeImg = document.querySelector('#modalCarousel .carousel-item.active img');
-    if (!activeImg) return;
-    
-    if (window.innerWidth <= 768) {
-        if (window.innerHeight > window.innerWidth) {
-        // Modo retrato
-        activeImg.style.maxHeight = '100vh';
-        activeImg.style.width = 'auto';
-        activeImg.style.maxWidth = '100%';
-        } else {
-        // Modo horizontal: pantalla completa
-        activeImg.style.width = '100vw';
-        activeImg.style.height = '100vh';
-        activeImg.style.objectFit = 'cover';
+        const activeImg = document.querySelector('#modalCarousel .carousel-item.active img');
+        const modalBody = document.querySelector('#imageModal .modal-body');
+        if (!activeImg || !modalBody) return;
+
+        // Solo aplica estas reglas en dispositivos móviles
+        if (window.innerWidth <= 768) {
+            if (window.innerHeight > window.innerWidth) {
+                // MODO VERTICAL
+                activeImg.style.width = 'auto';
+                activeImg.style.height = 'auto';
+                activeImg.style.maxWidth = '100%';
+                activeImg.style.maxHeight = '100vh';
+                activeImg.style.objectFit = 'contain';
+                activeImg.style.position = 'absolute';
+                activeImg.style.top = '50%';
+                activeImg.style.left = '50%';
+                activeImg.style.transform = 'translate(-50%, -50%)';
+                modalBody.style.display = 'flex';
+                modalBody.style.alignItems = 'center';
+                modalBody.style.justifyContent = 'center';
+                modalBody.style.background = '#000';
+            } else {
+                // MODO HORIZONTAL
+                activeImg.style.width = '100%';
+                activeImg.style.height = '100vh';
+                activeImg.style.objectFit = 'cover';
+                activeImg.style.objectPosition = 'center';
+                activeImg.style.position = 'static';
+                activeImg.style.transform = 'none';
+                modalBody.style.background = '#000';
+            }
         }
-    }
     }
     </script>
 </body>
