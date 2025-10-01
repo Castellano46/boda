@@ -496,6 +496,57 @@
     document.addEventListener('DOMContentLoaded', function() {
         createImageModal();
     });
+
+    // Función de apertura modal
+    function openModalWithImage(imageIndex) {
+    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+    modal.show();
+    
+    // Cuando se muestre el modal, vaya a la imagen correcta y centre la imagen.
+    document.getElementById('imageModal').addEventListener('shown.bs.modal', function() {
+        const modalCarousel = new bootstrap.Carousel(document.getElementById('modalCarousel'));
+        modalCarousel.to(imageIndex);
+        
+        // Centrar la imagen
+        centerModalImage();
+    }, { once: true });
+    
+    function handleOrientationChange() {
+        centerModalImage();
+    }
+    
+    // Eventos para el cambio de orientació
+    window.addEventListener('orientationchange', handleOrientationChange);
+    
+    // Cambio de tamaño para diferentes dispositivos
+    window.addEventListener('resize', handleOrientationChange);
+    
+    // Eliminar los detectores de eventos cuando se cierre el modal.
+    document.getElementById('imageModal').addEventListener('hidden.bs.modal', function() {
+        window.removeEventListener('orientationchange', handleOrientationChange);
+        window.removeEventListener('resize', handleOrientationChange);
+    }, { once: true });
+    }
+
+    // Función para centrar la imagen modal
+    function centerModalImage() {
+    const activeImg = document.querySelector('#modalCarousel .carousel-item.active img');
+    if (!activeImg) return;
+    
+    if (window.innerWidth <= 768) {
+        if (window.innerHeight > window.innerWidth) {
+        // Modo retrato
+        activeImg.style.maxHeight = '100vh';
+        activeImg.style.width = 'auto';
+        activeImg.style.maxWidth = '100%';
+        } else {
+        // Modo horizontal: pantalla completa
+        activeImg.style.width = '100vw';
+        activeImg.style.height = '100vh';
+        activeImg.style.objectFit = 'cover';
+        }
+    }
+    }
     </script>
 </body>
 </html>

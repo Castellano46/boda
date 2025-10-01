@@ -823,12 +823,35 @@ footer {
 
 /* Menú hamburguesa para móviles */
 .mobile-menu-btn {
-    display: none;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--color-dark);
-    cursor: pointer;
+  background: none !important;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-dark) !important;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+/* Icono visible en todos los estados */
+.mobile-menu-btn:active,
+.mobile-menu-btn:focus,
+.mobile-menu-btn.active {
+  background-color: rgba(184, 124, 124, 0.1) !important;
+  color: var(--color-dark) !important;
+  outline: none;
+}
+
+/* Target the icon */
+.mobile-menu-btn i {
+  color: var(--color-dark) !important;
+}
+
+/* Estado Activo */
+.mobile-menu-btn:active i,
+.mobile-menu-btn.active i {
+  color: var(--color-dark) !important;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
 }
 
 /* Media queries mejoradas para móviles */
@@ -1050,4 +1073,47 @@ footer {
     #modalCarousel .carousel-item img {
         max-height: 80vh;
     }
+}
+
+/* Estilos modales para movil */
+@media (max-width: 768px) {
+  .modal-dialog {
+    margin: 0;
+    max-width: 100%;
+    height: 100%;
+  }
+  
+  .modal-content {
+    height: 100%;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.95);
+  }
+  
+  .modal-body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
+  
+  #modalCarousel {
+    width: 100%;
+    height: 100%;
+  }
+  
+  #modalCarousel .carousel-item img {
+    max-height: 100vh;
+    max-width: 100%;
+    object-fit: contain;
+  }
+  
+  /* Orientación horizontal */
+  @media (orientation: landscape) {
+    #modalCarousel .carousel-item img {
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+  }
 }
