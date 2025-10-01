@@ -823,35 +823,12 @@ footer {
 
 /* Menú hamburguesa para móviles */
 .mobile-menu-btn {
-  background: none !important;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--color-dark) !important;
-  cursor: pointer;
-  padding: 0.5rem;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-/* Icono visible en todos los estados */
-.mobile-menu-btn:active,
-.mobile-menu-btn:focus,
-.mobile-menu-btn.active {
-  background-color: rgba(184, 124, 124, 0.1) !important;
-  color: var(--color-dark) !important;
-  outline: none;
-}
-
-/* Target the icon */
-.mobile-menu-btn i {
-  color: var(--color-dark) !important;
-}
-
-/* Estado Activo */
-.mobile-menu-btn:active i,
-.mobile-menu-btn.active i {
-  color: var(--color-dark) !important;
-  text-shadow: 0 0 2px rgba(255, 255, 255, 0.8);
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-dark);
+    cursor: pointer;
 }
 
 /* Media queries mejoradas para móviles */
@@ -1072,78 +1049,5 @@ footer {
 @media (min-width: 769px) and (max-width: 1024px) {
     #modalCarousel .carousel-item img {
         max-height: 80vh;
-    }
-}
-
-/* Estilos para el modal y la imagen en dispositivos móviles */
-@media (max-width: 768px) {
-    /* Fondo negro completo y asegura que el modal ocupe toda la pantalla */
-    #imageModal .modal-content {
-        background-color: #000 !important;
-        height: 100vh;
-        border-radius: 0;
-    }
-    
-    #imageModal .modal-body {
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: #000;
-    }
-
-    /* Contenedor del carrusel ocupa toda la pantalla */
-    #modalCarousel {
-        width: 100%;
-        height: 100%;
-    }
-
-    /* Estilos para MODO VERTICAL (retrato): Centrado vertical y horizontal */
-    @media (orientation: portrait) {
-        #modalCarousel .carousel-item.active img {
-            width: auto !important;
-            height: auto !important;
-            max-height: 100vh;
-            max-width: 100%;
-            object-fit: contain; /* Mantiene proporciones, sin recortar */
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%); /* Centrado perfecto */
-        }
-        /* Opcional: Si la imagen es muy alta, permite scroll */
-        #imageModal .modal-body {
-            align-items: flex-start;
-        }
-    }
-
-    /* Estilos para MODO HORIZONTAL (paisaje): Ocupa toda la pantalla */
-    @media (orientation: landscape) {
-        #modalCarousel .carousel-item.active img {
-            width: 100% !important;
-            height: 100vh !important;
-            object-fit: cover; /* Rellena toda la pantalla, recortando si es necesario */
-            object-position: center;
-        }
-    }
-
-    /* Mejora los controles de navegación (flechas) */
-    #modalCarousel .carousel-control-prev,
-    #modalCarousel .carousel-control-next {
-        width: 15%;
-        background: rgba(0, 0, 0, 0.3); /* Fondo semitransparente */
-        opacity: 0.7;
-        transition: opacity 0.3s ease;
-    }
-
-    #modalCarousel .carousel-control-prev:hover,
-    #modalCarousel .carousel-control-next:hover {
-        opacity: 0.9;
-    }
-
-    /* Posiciona los indicadores (puntos) sobre la imagen */
-    #modalCarousel .carousel-indicators {
-        bottom: 10px;
-        z-index: 2;
     }
 }
