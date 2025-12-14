@@ -373,6 +373,18 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <!-- Thank You Overlay -->
+    <div id="thankYouOverlay" class="thank-you-overlay">
+        <div class="thank-you-card">
+            <i class="fas fa-heart" style="font-size: 3rem; color: var(--color-accent); margin-bottom: 1rem;"></i>
+            <h3 style="font-family: var(--font-heading); font-size: 2.5rem; color: var(--color-accent-dark);">¡Gracias!
+            </h3>
+            <p style="font-size: 1.2rem; color: var(--color-text-light);">Tu mensaje ha sido guardado.</p>
+        </div>
+    </div>
+
     <script>
         // Init AOS
         AOS.init({
@@ -468,21 +480,35 @@
                         const data = await response.json();
 
                         if (data.success) {
+                            // Trigger Confetti
+                            confetti({
+                                particleCount: 150,
+                                spread: 70,
+                                origin: { y: 0.6 },
+                                colors: ['#d4a373', '#eaddcf', '#f2e6d9'] // Theme colors
+                            });
+
+                            // Show Thank You Overlay
+                            const overlay = document.getElementById('thankYouOverlay');
+                            overlay.classList.add('active');
+                            setTimeout(() => {
+                                overlay.classList.remove('active');
+                            }, 3000);
+
                             // Create new message card
                             const grid = document.querySelector('.messages-grid');
                             const newCard = document.createElement('div');
-                            newCard.className = 'message-card position-relative'; // Added position-relative for consistency
+                            newCard.className = 'message-card position-relative';
                             newCard.style.animation = 'fadeIn 1s ease';
 
-                            // Generate HTML (replicating template logic)
                             newCard.innerHTML = `
                                 <div class="message-actions"
                                     style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px;">
-                                    <i class="fas fa-edit text-primary cursor-pointer me-2" 
-                                        onclick="openEditModal('${data.nombre}', '${data.mensaje}')" 
+                                    <i class="fas fa-edit text-primary cursor-pointer me-2"
+                                        onclick="openEditModal('${data.nombre}', '${data.mensaje}')"
                                         title="Editar"></i>
-                                    <i class="fas fa-trash-alt text-danger cursor-pointer" 
-                                        onclick="deleteMessage('${data.nombre}', this)" 
+                                    <i class="fas fa-trash-alt text-danger cursor-pointer"
+                                        onclick="deleteMessage('${data.nombre}', this)"
                                         title="Borrar"></i>
                                 </div>
                                 <div class="message-header pe-5">
@@ -492,9 +518,7 @@
                                 <div class="msg-body">"${data.mensaje}"</div>
                             `;
 
-                            // Insert at the beginning
                             if (grid.querySelector('p')) {
-                                // If "be the first" text exists, replace it
                                 grid.innerHTML = '';
                                 grid.appendChild(newCard);
                             } else {
