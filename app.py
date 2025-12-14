@@ -86,5 +86,42 @@ def borrar_mensaje():
         print(f"Error al borrar mensaje: {e}")
         return redirect('/')
 
+@app.route('/editar-mensaje', methods=['POST'])
+def editar_mensaje():
+    """Edita un mensaje existente"""
+    try:
+        nombre_original = request.form.get('nombre_original')
+        nombre_nuevo = request.form.get('nombre')
+        mensaje_nuevo = request.form.get('mensaje')
+        
+        if not nombre_original or not nombre_nuevo or not mensaje_nuevo:
+            return redirect('/')
+            
+        mensajes = leer_mensajes()
+        mensajes_actualizados = []
+        encontrado = False
+        
+        for m in mensajes:
+            if m['nombre'] == nombre_original and not encontrado:
+                # Actualizar este mensaje
+                m['nombre'] = nombre_nuevo
+                m['mensaje'] = mensaje_nuevo
+                # Mantener la fecha original o actualizarla si se prefiere
+                # m['fecha'] = datetime.now().strftime('%d/%m/%Y - %H:%M:%S') 
+                encontrado = True
+            mensajes_actualizados.append(m)
+            
+        if encontrado:
+            with open(ARCHIVO_MENSAJES, 'w', newline='', encoding='utf-8') as archivo:
+                campos = ['nombre', 'mensaje', 'fecha']
+                escritor = csv.DictWriter(archivo, fieldnames=campos)
+                escritor.writeheader()
+                escritor.writerows(mensajes_actualizados)
+                
+        return redirect('/')
+    except Exception as e:
+        print(f"Error al editar mensaje: {e}")
+        return redirect('/')
+
 if __name__ == '__main__':
     app.run(debug=True)

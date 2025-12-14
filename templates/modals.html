@@ -1,0 +1,64 @@
+<!-- Modals -->
+
+<!-- Allergy Modal -->
+<div class="modal fade" id="allergyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="background-color: var(--color-surface);">
+            <div class="modal-header border-0">
+                <h5 class="modal-title" style="font-family: var(--font-heading);">Información sobre Alergias</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Queremos que todos disfruten del banquete con total tranquilidad.</p>
+                <p>Por favor, al confirmar tu asistencia por teléfono, indícanos si tienes alguna alergia alimentaria,
+                    intolerancia o sigues alguna dieta especial (vegetariana, vegana, celíaca, etc.).</p>
+                <p class="text-center mt-3" style="color: var(--color-accent-dark); font-weight: bold;">
+                    ¡Nos encargaremos de que tengas un menú delicioso y seguro!
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Image Lightbox Modal -->
+<div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content bg-transparent border-0 shadow-none">
+            <div class="modal-body p-0 text-center position-relative">
+                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3"
+                    data-bs-dismiss="modal" aria-label="Close"></button>
+                <img src="" id="lightboxImage" class="img-fluid rounded shadow-lg" style="max-height: 90vh;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Message Modal -->
+<div class="modal fade" id="editMessageModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Editar Mensaje</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/editar-mensaje" method="POST" id="editForm">
+                    <input type="hidden" name="nombre_original" id="editOriginalName">
+                    <div class="mb-3">
+                        <label for="editNombre" class="form-label">Tu Nombre</label>
+                        <input type="text" class="form-control" id="editNombre" name="nombre" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editMensaje" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="editMensaje" name="mensaje" rows="4" required></textarea>
+                    </div>
+                    <div class="d-end">
+                        <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary"
+                            style="background-color: var(--color-accent); border: none;">Guardar Cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

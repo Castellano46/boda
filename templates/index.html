@@ -1,16 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ignacio y Lucía - Nuestra Boda</title>
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:wght@400;700&family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Ignacio y Lucía | Nuestra Boda</title>
+
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;600&family=Great+Vibes&display=swap"
+        rel="stylesheet">
+
+    <!-- Libraries -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        .phone-link {
+            text-decoration: none;
+            color: inherit;
+            font-weight: normal;
+        }
+
+        .phone-link:hover {
+            color: var(--color-accent);
+            text-decoration: underline;
+        }
+
+        .carousel-item {
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body>
+
     <!-- Navegación -->
     <div class="nav-container">
         <nav>
@@ -19,7 +46,7 @@
                 <i class="fas fa-bars"></i>
             </button>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#countdown">Cuenta Regresiva</a></li>
+                <li><a href="#hero">Inicio</a></li>
                 <li><a href="#our-story">Nuestra Historia</a></li>
                 <li><a href="#wedding-details">Detalles</a></li>
                 <li><a href="#guestbook">Libro de Firmas</a></li>
@@ -27,475 +54,384 @@
         </nav>
     </div>
 
-    <!-- Header -->
-    <header>
-        <h1 class="couple-names">Ignacio & Lucía</h1>
-        <p class="wedding-date">9 de Octubre, 2027</p>
-        <h3>¡Nos casamos!</h3>
+    <!-- Header / Hero (Parallax) -->
+    <header id="hero">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-overlay"></div>
+
+        <div class="header-content" data-aos="fade-up" data-aos-duration="1500">
+            <h1 class="couple-names">
+                Ignacio <span>&</span> Lucía
+            </h1>
+            <p class="wedding-date">9 de Octubre, 2027</p>
+        </div>
+
+        <a href="#countdown" class="scroll-indicator">
+            <i class="fas fa-chevron-down"></i>
+        </a>
     </header>
 
     <!-- Cuenta Regresiva -->
     <section id="countdown">
-        <h2 class="section-title">Cuenta Regresiva</h2>
-        <div class="countdown-container">
-            <div class="countdown-item">
-                <span class="countdown-number" id="days">00</span>
-                <span class="countdown-label">Días</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="hours">00</span>
-                <span class="countdown-label">Horas</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="minutes">00</span>
-                <span class="countdown-label">Minutos</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="seconds">00</span>
-                <span class="countdown-label">Segundos</span>
+        <div data-aos="fade-up">
+            <h2 class="section-title">Solo faltan...</h2>
+            <div class="countdown-container">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Días</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Horas</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Min</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Seg</span>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Nuestra Historia -->
     <section id="our-story">
-        <h2 class="section-title">Nuestra Historia</h2>
-        <div class="story-content">
-            <div class="story-text">
-                <p>Hace ya algunos años, en vísperas del Carnaval, el destino nos cruzó de manera inesperada. Sin buscarlo, sin planearlo, nos encontramos y descubrimos en el otro aquello que nunca imaginamos: nuestro TODO, nuestro refugio, nuestro hogar repentino.
-                Lo que empezó como una simple conversación y encuentros casuales, pronto se transformó en una conexión profunda y única, capaz de cambiar para siempre el rumbo de nuestras vidas.</p>
-                <p>Tras 8 años y medio de compartir sueños, risas y aventuras, Ignacio me sorprendió con la más hermosa de las promesas: una propuesta de matrimonio en un viaje inolvidable a Almuñécar, frente al mar y bajo la magia de un atardecer que parecía escrito para nosotros. Fue, sin duda, el instante más mágico de nuestra historia.
+        <h2 class="section-title" data-aos="fade-up">Nuestra Historia</h2>
 
-                Hoy, con la misma ilusión y amor que nos unió aquel primer día, queremos compartir nuestra felicidad con todos ustedes.</p>
+        <!-- Part 1: The Beginning -->
+        <div class="story-block" data-aos="fade-right">
+            <div class="story-text">
+                <h3>Un Encuentro Inesperado</h3>
+                <p>Hace ya algunos años, en vísperas del Carnaval, el destino nos cruzó de manera inesperada. Sin
+                    buscarlo, sin planearlo, nos encontramos y descubrimos en el otro aquello que nunca imaginamos:
+                    nuestro refugio.</p>
+                <p>Lo que empezó como una simple conversación y encuentros casuales, pronto se transformó en una
+                    conexión profunda y única, capaz de cambiar para siempre el rumbo de nuestras vidas.</p>
+            </div>
+            <div class="story-image-wrap">
+                <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Pareja">
             </div>
         </div>
-        <div class="story-image">
-            <!-- Carrusel Bootstrap 5 - Versión clickeable -->
-            <div id="storyCarousel" class="carousel slide carousel-clickable" data-bs-ride="carousel">
-                <!-- Indicadores (puntos inferiores) -->
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#storyCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#storyCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#storyCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#storyCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                </div>
-                <!-- Imágenes del carrusel - Ahora clickeables -->
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Ignacio y Lucía sonriendo">
-                        <div class="carousel-overlay">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                            <span>Haz clic para ver en grande</span>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="La propuesta de matrimonio">
-                        <div class="carousel-overlay">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                            <span>Haz clic para ver en grande</span>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" class="d-block w-100" alt="Viaje a Almuñécar">
-                        <div class="carousel-overlay">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                            <span>Haz clic para ver en grande</span>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="https://cdn.pixabay.com/photo-2019/05/24/18/41/marriage-4226896_1280.jpg" class="d-block w-100" alt="Celebración">
-                        <div class="carousel-overlay">
-                            <i class="fas fa-expand-arrows-alt"></i>
-                            <span>Haz clic para ver en grande</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Botones de anterior/siguiente -->
-                <button class="carousel-control-prev" type="button" data-bs-target="#storyCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Anterior</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#storyCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Siguiente</span>
-                </button>
+
+        <!-- Part 2: The Proposal -->
+        <div class="story-block reversed" data-aos="fade-left">
+            <div class="story-text">
+                <h3>La Promesa</h3>
+                <p>Tras 8 años y medio de compartir sueños, risas y aventuras, Ignacio me sorprendió. En un viaje
+                    inolvidable a Almuñécar, frente al mar y bajo la magia de un atardecer que parecía escrito para
+                    nosotros, hizo la pregunta.</p>
+                <p>Fue, sin duda, el instante más mágico de nuestra historia. Y hoy, con la misma ilusión, queremos
+                    compartir nuestra felicidad con todos ustedes.</p>
             </div>
-        </div>    
-        <p style="text-align: center;">Pulsa sobre una foto para ampliar.</p>    
+            <div class="story-image-wrap">
+                <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                    alt="Anillo Compromiso">
+            </div>
+        </div>
+
+        <!-- Gallery Carousel -->
+        <div class="row mt-5" data-aos="zoom-in">
+            <div class="col-md-8 mx-auto">
+                <div id="storyCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active" onclick="openLightbox(this)">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                class="d-block w-100" alt="Foto">
+                            <div class="carousel-caption d-none d-md-block">
+                                <span class="badge bg-dark bg-opacity-50"><i class="fas fa-expand"></i> Ver pantalla
+                                    completa</span>
+                            </div>
+                        </div>
+                        <div class="carousel-item" onclick="openLightbox(this)">
+                            <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                class="d-block w-100" alt="Foto">
+                            <div class="carousel-caption d-none d-md-block">
+                                <span class="badge bg-dark bg-opacity-50"><i class="fas fa-expand"></i> Ver pantalla
+                                    completa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#storyCarousel"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#storyCarousel"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+                <p class="text-center mt-2 text-muted small"><i class="fas fa-hand-pointer"></i> Haz clic en la imagen
+                    para ampliar</p>
+            </div>
+        </div>
     </section>
 
-    <!-- Detalles de la Boda -->
-    <section id="wedding-details">
-        <h2 class="section-title">Detalles de la Boda</h2>
-        <div class="details-container">
-            
-            <div class="detail-card">
-                <div class="detail-icon">
-                    <i class="fas fa-church"></i>
-                </div>
+    <!-- Detalles -->
+    <section id="wedding-details" style="background-color: var(--color-surface);">
+        <h2 class="section-title" data-aos="fade-up">Detalles del Evento</h2>
+
+        <div class="details-grid">
+            <!-- Ceremonia -->
+            <div class="detail-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="detail-icon"><i class="fas fa-church"></i></div>
                 <h3 class="detail-title">Ceremonia</h3>
-                <p>Ceremonia Civil en Salones María Luisa</p>
-                <p>12:00 horas</p>
-                <p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Salones+María+Luisa+Torredonjimeno" 
-                    target="_blank" 
-                    class="map-link">
-                        Ctra. Córdoba. Torredonjimeno
-                    </a>
-                </p>
+                <div class="detail-info">Ceremonia Civil en Salones María Luisa</div>
+                <div class="detail-info">12:00 horas</div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Salones+María+Luisa+Torredonjimeno"
+                    target="_blank" class="map-link">Ver Mapa</a>
             </div>
 
-            <div class="detail-card">
-                <div class="detail-icon">
-                    <i class="fas fa-glass-cheers"></i>
-                </div>
+            <!-- Recepción -->
+            <div class="detail-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="detail-icon"><i class="fas fa-glass-cheers"></i></div>
                 <h3 class="detail-title">Recepción</h3>
-                <p>Salones María Luisa</p>
-                <p>14:00 horas</p>
-                <p>
-                    <a href="https://www.google.com/maps/search/?api=1&query=Salones+María+Luisa+Torredonjimeno" 
-                    target="_blank" 
-                    class="map-link">
-                        Ctra. Córdoba. Torredonjimeno
-                    </a>
-                </p>
+                <div class="detail-info">Salones María Luisa</div>
+                <div class="detail-info">14:00 horas</div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Salones+María+Luisa+Torredonjimeno"
+                    target="_blank" class="map-link">Ver Mapa</a>
             </div>
 
-            <div class="detail-card">
-                <div class="detail-icon">
-                    <i class="fas fa-ring"></i>
-                </div>
-                <h3 class="detail-title">Confirma tu asistencia</h3>
-                <div class="detail-content">
-                    <div class="contact-line">
-                        <span class="contact-name">Ignacio:</span>
-                        <div class="phone-complete">
-                            <i class="fas fa-phone-alt phone-icon"></i>
-                            <span class="phone-text">678 022 642</span>
-                        </div>
-                    </div>
-                    <div class="contact-line">
-                        <span class="contact-name">Lucía:</span>
-                        <div class="phone-complete">
-                            <i class="fas fa-phone-alt phone-icon"></i>
-                            <span class="phone-text">678 073 149</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- RSVP -->
+            <div class="detail-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="detail-icon"><i class="fas fa-mobile-alt"></i></div>
+                <h3 class="detail-title">Confirmar</h3>
 
-            <div class="detail-card">
-                <div class="detail-icon">
-                    <i class="fas fa-exclamation-triangle"></i>
+                <div class="contact-info-block" style="margin-bottom: 1rem;">
+                    <div class="d-flex justify-content-center align-items-center gap-2 mb-2">
+                        <span class="fw-bold">Ignacio:</span>
+                        <a href="tel:678022642" class="phone-link" title="Llamar">
+                            <i class="fas fa-phone-alt"></i> 678 022 642
+                        </a>
+                        <a href="https://wa.me/34678022642?text=Hola%20Ignacio,%20quiero%20confirmar%20mi%20asistencia%20a%20la%20boda.%20%C2%A1Nos%20vemos%20all%C3%AD!"
+                            target="_blank" class="whatsapp-btn" title="Enviar WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                    <div class="d-flex justify-content-center align-items-center gap-2">
+                        <span class="fw-bold">Lucía:</span>
+                        <a href="tel:678073149" class="phone-link" title="Llamar">
+                            <i class="fas fa-phone-alt"></i> 678 073 149
+                        </a>
+                        <a href="https://wa.me/34678073149?text=Hola%20Luc%C3%ADa,%20quiero%20confirmar%20mi%20asistencia%20a%20la%20boda.%20%C2%A1Nos%20vemos%20all%C3%AD!"
+                            target="_blank" class="whatsapp-btn" title="Enviar WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
-                <h3 class="detail-title">Alergias Alimentarias</h3>
-                <p>Si tienes alguna alergia o intolerancia, por favor, indícanoslo al confirmar tu asistencia.</p>
+
+                <div class="detail-info" style="font-size: 0.8rem; margin-top: 15px;">
+                    ¿Tienes alergias?
+                    <button type="button" class="btn btn-link p-0" data-bs-toggle="modal" data-bs-target="#allergyModal"
+                        style="color: var(--color-accent); font-size: 0.8rem; text-decoration: none;">
+                        Infórmanos aquí
+                    </button>
+                    <i class="fas fa-info-circle" style="color: var(--color-accent); cursor: pointer;"
+                        data-bs-toggle="modal" data-bs-target="#allergyModal"></i>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Libro de Firmas -->
     <section id="guestbook">
-        <h2 class="section-title">Libro de Firmas</h2>
-        <p>Deja un mensaje especial para los novios</p>
-        
-        <form class="guestbook-form" action="/agregar-mensaje" method="POST">
-            <div class="form-group">
-                <label for="name">Tu nombre</label>
-                <input type="text" id="name" name="nombre" required>
-            </div>
-            <div class="form-group">
-                <label for="message">Tu mensaje</label>
-                <textarea id="message" name="mensaje" required></textarea>
-            </div>
-            <button type="submit">Enviar Mensaje</button>
-        </form>
-        
-        <div class="guestbook-entries">
-            {% if mensajes %}
+        <div data-aos="fade-up">
+            <h2 class="section-title">Libro de Firmas</h2>
+
+            <form class="guestbook-form" action="/agregar-mensaje" method="POST">
+                <div class="form-group">
+                    <label for="name">Tu Nombre</label>
+                    <input type="text" id="name" name="nombre" required placeholder="Escribe tu nombre... ">
+                </div>
+                <div class="form-group">
+                    <label for="message">Tus Deseos</label>
+                    <textarea id="message" name="mensaje" required
+                        placeholder="Déjanos un mensaje bonito..."></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Enviar Mensaje</button>
+            </form>
+
+            <div class="messages-grid">
+                {% if mensajes %}
                 {% for mensaje in mensajes %}
-                <div class="guestbook-entry">
-                    <div class="entry-header">
-                        <span class="entry-name">{{ mensaje.nombre }}</span>
-                        <span class="entry-date">{{ mensaje.fecha }}</span>
+                <div class="message-card position-relative">
+                    <div class="message-actions"
+                        style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px;">
+                        <!-- Edit Button -->
+                        <button class="btn btn-sm p-0 text-muted"
+                            onclick="openEditModal('{{ mensaje.nombre }}', '{{ mensaje.mensaje }}')" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <!-- Delete Button -->
+                        <form action="/borrar-mensaje" method="POST" class="d-inline"
+                            onsubmit="return confirm('¿Seguro que quieres borrar este mensaje?');">
+                            <input type="hidden" name="nombre" value="{{ mensaje.nombre }}">
+                            <button type="submit" class="btn btn-sm p-0 text-danger" title="Borrar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+                        </form>
                     </div>
-                    <div class="entry-message">{{ mensaje.mensaje }}</div>
+                    <div class="message-header pe-5">
+                        <span class="msg-author">{{ mensaje.nombre }}</span>
+                        <span class="msg-date">{{ mensaje.fecha }}</span>
+                    </div>
+                    <div class="msg-body">"{{ mensaje.mensaje }}"</div>
                 </div>
                 {% endfor %}
-            {% else %}
-                <p>No hay mensajes aún. ¡Sé el primero en dejar un mensaje!</p>
-            {% endif %}
+                {% else %}
+                <p style="grid-column: 1/-1; text-align: center; color: #999;">Sé el primero en firmar nuestro libro.
+                </p>
+                {% endif %}
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>Con amor, Ignacio y Lucía</p>
-        <p>9 de Octubre, 2027</p>
+        <h2 class="footer-names">Ignacio & Lucía</h2>
+        <p>Gracias por acompañarnos en este día tan especial.</p>
     </footer>
 
+    <!-- Modals -->
+
+    <!-- Allergy Modal -->
+    <div class="modal fade" id="allergyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: var(--color-surface);">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" style="font-family: var(--font-heading);">Información sobre Alergias</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Queremos que todos disfruten del banquete con total tranquilidad.</p>
+                    <p>Por favor, al confirmar tu asistencia por teléfono, indícanos si tienes alguna alergia
+                        alimentaria, intolerancia o sigues alguna dieta especial (vegetariana, vegana, celíaca, etc.).
+                    </p>
+                    <p class="text-center mt-3" style="color: var(--color-accent-dark); font-weight: bold;">
+                        ¡Nos encargaremos de que tengas un menú delicioso y seguro!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Image Lightbox Modal -->
+    <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl">
+            <div class="modal-content bg-transparent border-0 shadow-none">
+                <div class="modal-body p-0 text-center position-relative">
+                    <button type="button"
+                        class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3 bg-white"
+                        data-bs-dismiss="modal" aria-label="Close"></button>
+                    <img src="" id="lightboxImage" class="img-fluid rounded shadow-lg" style="max-height: 90vh;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Message Modal -->
+    <div class="modal fade" id="editMessageModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Editar Mensaje</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/editar-mensaje" method="POST" id="editForm">
+                        <input type="hidden" name="nombre_original" id="editOriginalName">
+                        <div class="mb-3">
+                            <label for="editNombre" class="form-label">Tu Nombre</label>
+                            <input type="text" class="form-control" id="editNombre" name="nombre" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editMensaje" class="form-label">Mensaje</label>
+                            <textarea class="form-control" id="editMensaje" name="mensaje" rows="4" required></textarea>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary me-2"
+                                data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary"
+                                style="background-color: var(--color-accent); border: none;">Guardar Cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Cuenta regresiva
+        // Init AOS
+        AOS.init({
+            once: true,
+            offset: 100
+        });
+
+        // Parallax Effect
+        window.addEventListener('scroll', function () {
+            const scrolled = window.pageYOffset;
+            const heroBg = document.getElementById('heroBg');
+            if (heroBg) heroBg.style.transform = 'translateY(' + (scrolled * 0.5) + 'px)';
+        });
+
+        // Countdown
         function updateCountdown() {
             const weddingDate = new Date('October 9, 2027 16:00:00').getTime();
             const now = new Date().getTime();
             const timeLeft = weddingDate - now;
-            
+
             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-            
-            document.getElementById('days').textContent = days < 10 ? '0' + days : days;
-            document.getElementById('hours').textContent = hours < 10 ? '0' + hours : hours;
-            document.getElementById('minutes').textContent = minutes < 10 ? '0' + minutes : minutes;
-            document.getElementById('seconds').textContent = seconds < 10 ? '0' + seconds : seconds;
-            
-            if (timeLeft < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById('countdown').innerHTML = '<h2 class="section-title">¡Hoy es el gran día!</h2>';
+
+            if (document.getElementById('days')) {
+                document.getElementById('days').textContent = String(days).padStart(2, '0');
+                document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+                document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
             }
         }
-        
-        const countdownInterval = setInterval(updateCountdown, 1000);
-        updateCountdown(); // Ejecutar inmediatamente al cargar
-                
-        // Navegación suave
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
 
-       // Funcionalidad para borrar mensajes
-        document.querySelectorAll('.entry-name').forEach(nameElement => {
-            nameElement.style.cursor = 'pointer';
-            
-            nameElement.addEventListener('click', function(e) {
-                e.stopPropagation(); // Prevenir que el evento se propague al document
-                
-                const entry = this.closest('.guestbook-entry');
-                let deleteLink = entry.querySelector('.delete-link');
-                const nombre = this.textContent.trim();
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
 
-                // Ocultar todos los demás enlaces de borrado primero
-                document.querySelectorAll('.delete-link').forEach(link => {
-                    if (link !== deleteLink) {
-                        link.remove();
-                    }
-                });
-
-                if (deleteLink) {
-                    deleteLink.remove();
-                } else {
-                    deleteLink = document.createElement('a');
-                    deleteLink.href = '#';
-                    deleteLink.className = 'delete-link';
-                    deleteLink.textContent = ' [Borrar]';
-                    deleteLink.style.color = '#ff6b6b';
-                    deleteLink.style.marginLeft = '10px';
-                    deleteLink.style.fontSize = '0.8em';
-
-                    deleteLink.addEventListener('click', function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        
-                        if (confirm('¿Estás seguro de que quieres borrar este mensaje?')) {
-                            const form = document.createElement('form');
-                            form.method = 'POST';
-                            form.action = '/borrar-mensaje';
-
-                            const input = document.createElement('input');
-                            input.type = 'hidden';
-                            input.name = 'nombre';
-                            input.value = nombre;
-
-                            form.appendChild(input);
-                            document.body.appendChild(form);
-                            form.submit();
-                        }
-                    });
-
-                    this.appendChild(deleteLink);
-                }
-            });
-        });
-
-        // Event listener para cerrar los enlaces de borrado al hacer clic fuera
-        document.addEventListener('click', function(e) {
-            // Si el clic NO fue en un elemento .entry-name o .delete-link
-            if (!e.target.closest('.entry-name') && !e.target.closest('.delete-link')) {
-                // Ocultar todos los enlaces de borrado
-                document.querySelectorAll('.delete-link').forEach(link => {
-                    link.remove();
-                });
-            }
-        });
-
-        // También cerrar al presionar la tecla Escape
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                document.querySelectorAll('.delete-link').forEach(link => {
-                    link.remove();
-                });
-            }
-        });
-
-        // Menú hamburguesa para móviles
+        // Mobile Menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const navLinks = document.getElementById('navLinks');
 
-        if (mobileMenuBtn && navLinks) {
-            mobileMenuBtn.addEventListener('click', function() {
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
                 navLinks.classList.toggle('active');
-                
-                // Cambiar icono
-                const icon = this.querySelector('i');
-                if (navLinks.classList.contains('active')) {
-                    icon.classList.remove('fa-bars');
-                    icon.classList.add('fa-times');
-                } else {
-                    icon.classList.remove('fa-times');
-                    icon.classList.add('fa-bars');
-                }
-            });
-
-            // Cerrar menú al hacer clic en un enlace
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', function() {
-                    navLinks.classList.remove('active');
-                    mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-                    mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-                });
-            });
-
-            // Cerrar menú al hacer clic fuera
-            document.addEventListener('click', function(e) {
-                if (!e.target.closest('.nav-container')) {
-                    navLinks.classList.remove('active');
-                    if (mobileMenuBtn.querySelector('i')) {
-                        mobileMenuBtn.querySelector('i').classList.remove('fa-times');
-                        mobileMenuBtn.querySelector('i').classList.add('fa-bars');
-                    }
-                }
             });
         }
 
-    // Función para crear el modal de imágenes dinámicamente
-    function createImageModal() {
-        // Crear el elemento modal
-        const modal = document.createElement('div');
-        modal.className = 'modal fade';
-        modal.id = 'imageModal';
-        modal.tabIndex = '-1';
-        modal.setAttribute('aria-labelledby', 'imageModalLabel');
-        modal.setAttribute('aria-hidden', 'true');
-        
-        modal.innerHTML = `
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="imageModalLabel">Galería de fotos</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div id="modalCarousel" class="carousel slide" data-bs-ride="carousel">
-                            <div class="carousel-inner" id="modalCarouselInner">
-                                <!-- Las imágenes se insertarán aquí automáticamente -->
-                            </div>
-                            <button class="carousel-control-prev" type="button" data-bs-target="#modalCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Anterior</span>
-                            </button>
-                            <button class="carousel-control-next" type="button" data-bs-target="#modalCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Siguiente</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        // Agregar el modal al body
-        document.body.appendChild(modal);
-        
-        // Copiar las imágenes del carrusel principal al modal
-        copyImagesToModal();
-    }
-
-    // Función para copiar las imágenes al modal
-    function copyImagesToModal() {
-        const storyCarousel = document.getElementById('storyCarousel');
-        const modalCarouselInner = document.getElementById('modalCarouselInner');
-        
-        if (!storyCarousel || !modalCarouselInner) return;
-        
-        // Obtener todas las imágenes del carrusel principal
-        const carouselItems = storyCarousel.querySelectorAll('.carousel-item');
-        
-        // Limpiar el modal primero
-        modalCarouselInner.innerHTML = '';
-        
-        // Copiar cada imagen al modal
-        carouselItems.forEach((item, index) => {
-            const img = item.querySelector('img');
-            if (img) {
-                const modalItem = document.createElement('div');
-                modalItem.className = `carousel-item ${index === 0 ? 'active' : ''}`;
-                modalItem.innerHTML = `<img src="${img.src}" class="d-block w-100" alt="${img.alt}">`;
-                modalCarouselInner.appendChild(modalItem);
+        // Lightbox Function
+        function openLightbox(element) {
+            const img = element.querySelector('img');
+            const lightboxImage = document.getElementById('lightboxImage');
+            if (img && lightboxImage) {
+                lightboxImage.src = img.src;
+                const lightboxModal = new bootstrap.Modal(document.getElementById('lightboxModal'));
+                lightboxModal.show();
             }
-        });
-        
-        // Agregar eventos a las imágenes del carrusel principal
-        addCarouselClickEvents();
-    }
+        }
 
-    // Función para agregar eventos de clic a las imágenes
-    function addCarouselClickEvents() {
-        const carouselItems = document.querySelectorAll('#storyCarousel .carousel-item');
-        
-        carouselItems.forEach((item, index) => {
-            item.style.cursor = 'pointer';
-            
-            item.addEventListener('click', function() {
-                openModalWithImage(index);
-            });
-        });
-    }
+        // Edit Message Function
+        function openEditModal(nombre, mensaje) {
+            document.getElementById('editOriginalName').value = nombre;
+            document.getElementById('editNombre').value = nombre;
+            document.getElementById('editMensaje').value = mensaje;
 
-    // Función para abrir el modal con una imagen específica
-    function openModalWithImage(imageIndex) {
-        const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-        
-        // Mostrar el modal
-        modal.show();
-        
-        // Cuando el modal se muestre, ir a la imagen correcta
-        document.getElementById('imageModal').addEventListener('shown.bs.modal', function() {
-            const modalCarousel = new bootstrap.Carousel(document.getElementById('modalCarousel'));
-            modalCarousel.to(imageIndex);
-        }, { once: true }); // El evento se ejecutará solo una vez
-    }
-
-    // Inicializar el modal cuando la página cargue
-    document.addEventListener('DOMContentLoaded', function() {
-        createImageModal();
-    });
+            const editModal = new bootstrap.Modal(document.getElementById('editMessageModal'));
+            editModal.show();
+        }
     </script>
 </body>
+
 </html>
