@@ -260,18 +260,13 @@
                     <div class="message-actions"
                         style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px;">
                         <!-- Edit Button -->
-                        <button class="btn btn-sm p-0 text-muted"
-                            onclick="openEditModal('{{ mensaje.nombre }}', '{{ mensaje.mensaje }}')" title="Editar">
-                            <i class="fas fa-edit"></i>
-                        </button>
+                        <!-- Edit Button -->
+                        <i class="fas fa-edit text-primary cursor-pointer me-2"
+                            onclick="openEditModal('{{ mensaje.nombre }}', '{{ mensaje.mensaje }}')" title="Editar"></i>
                         <!-- Delete Button -->
-                        <form action="/borrar-mensaje" method="POST" class="d-inline"
-                            onsubmit="return confirm('¿Seguro que quieres borrar este mensaje?');">
-                            <input type="hidden" name="nombre" value="{{ mensaje.nombre }}">
-                            <button type="submit" class="btn btn-sm p-0 text-danger" title="Borrar">
-                                <i class="fas fa-trash-alt"></i>
-                            </button>
-                        </form>
+                        <!-- Delete Button -->
+                        <i class="fas fa-trash-alt text-danger cursor-pointer"
+                            onclick="deleteMessage('{{ mensaje.nombre }}', this)" title="Borrar"></i>
                     </div>
                     <div class="message-header pe-5">
                         <span class="msg-author">{{ mensaje.nombre }}</span>
@@ -321,11 +316,24 @@
     <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content bg-transparent border-0 shadow-none">
-                <div class="modal-body p-0 text-center position-relative">
+                <div
+                    class="modal-body p-0 text-center position-relative d-flex align-items-center justify-content-center">
                     <button type="button"
                         class="btn-close btn-close-white position-absolute top-0 end-0 m-3 z-3 bg-white"
                         data-bs-dismiss="modal" aria-label="Close"></button>
+
+                    <!-- Navigation Buttons -->
+                    <button class="btn btn-link text-white position-absolute start-0 ms-2 z-3"
+                        onclick="navigateLightbox(-1)" style="font-size: 2rem;">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+
                     <img src="" id="lightboxImage" class="img-fluid rounded shadow-lg" style="max-height: 90vh;">
+
+                    <button class="btn btn-link text-white position-absolute end-0 me-2 z-3"
+                        onclick="navigateLightbox(1)" style="font-size: 2rem;">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -432,13 +440,177 @@
         }
 
         // Lightbox Function
+        let currentImageIndex = 0;
+        const carouselImages = [];
+
+        // Initialize images array on load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.carousel-item img').forEach((img, index) => {
+                carouselImages.push(img.src);
+            });
+        });
+
+
+        // AJAX Guestbook Handling
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add Message
+            const addForm = document.querySelector('.guestbook-form');
+            if (addForm) {
+                addForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(addForm);
+
+                    try {
+                        const response = await fetch('/agregar-mensaje', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const data = await response.json();
+
+                        if (data.success) {
+                            // Create new message card
+                            const grid = document.querySelector('.messages-grid');
+                            const newCard = document.createElement('div');
+                            newCard.className = 'message-card position-relative'; // Added position-relative for consistency
+                            newCard.style.animation = 'fadeIn 1s ease';
+
+                            // Generate HTML (replicating template logic)
+                            newCard.innerHTML = `
+                                <div class="message-actions"
+                                    style="position: absolute; top: 15px; right: 15px; display: flex; gap: 10px;">
+                                    <i class="fas fa-edit text-primary cursor-pointer me-2" 
+                                        onclick="openEditModal('${data.nombre}', '${data.mensaje}')" 
+                                        title="Editar"></i>
+                                    <i class="fas fa-trash-alt text-danger cursor-pointer" 
+                                        onclick="deleteMessage('${data.nombre}', this)" 
+                                        title="Borrar"></i>
+                                </div>
+                                <div class="message-header pe-5">
+                                    <span class="msg-author">${data.nombre}</span>
+                                    <span class="msg-date">${data.fecha}</span>
+                                </div>
+                                <div class="msg-body">"${data.mensaje}"</div>
+                            `;
+
+                            // Insert at the beginning
+                            if (grid.querySelector('p')) {
+                                // If "be the first" text exists, replace it
+                                grid.innerHTML = '';
+                                grid.appendChild(newCard);
+                            } else {
+                                grid.insertBefore(newCard, grid.firstChild);
+                            }
+
+                            addForm.reset();
+                        }
+                    } catch (err) {
+                        console.error('Error adding message:', err);
+                    }
+                });
+            }
+
+            // Edit Message
+            const editForm = document.getElementById('editForm');
+            if (editForm) {
+                editForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(editForm);
+                    const originalName = document.getElementById('editOriginalName').value;
+
+                    try {
+                        const response = await fetch('/editar-mensaje', {
+                            method: 'POST',
+                            body: formData
+                        });
+                        const data = await response.json();
+
+                        if (data.success) {
+                            // Find the card and update it directly
+                            // Searching by author name isn't perfect if duplicates exist, but consistent with current logic
+                            const authors = document.querySelectorAll('.msg-author');
+                            for (let author of authors) {
+                                if (author.textContent === originalName) {
+                                    const card = author.closest('.message-card');
+                                    author.textContent = data.nombre;
+                                    card.querySelector('.msg-body').textContent = `"${data.mensaje}"`;
+
+                                    // Update onclick handlers for next edit/delete
+                                    const editBtn = card.querySelector('.fa-edit');
+                                    const deleteBtn = card.querySelector('.fa-trash-alt');
+
+                                    editBtn.setAttribute('onclick', `openEditModal('${data.nombre}', '${data.mensaje}')`);
+                                    deleteBtn.setAttribute('onclick', `deleteMessage('${data.nombre}', this)`);
+
+                                    // Close modal
+                                    const modal = bootstrap.Modal.getInstance(document.getElementById('editMessageModal'));
+                                    modal.hide();
+                                    break;
+                                }
+                            }
+                        }
+                    } catch (err) {
+                        console.error('Error editing message:', err);
+                    }
+                });
+            }
+        });
+
+        // Delete Message Function (AJAX)
+        async function deleteMessage(nombre, element) {
+            if (!confirm('¿Seguro que quieres borrar este mensaje?')) return;
+
+            const formData = new FormData();
+            formData.append('nombre', nombre);
+
+            try {
+                const response = await fetch('/borrar-mensaje', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
+
+                if (data.success) {
+                    // Fade out and remove
+                    const card = element.closest('.message-card');
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.9)';
+
+                    setTimeout(() => {
+                        card.remove();
+                    }, 500);
+                }
+            } catch (err) {
+                console.error('Error deleting message:', err);
+            }
+        }
+
         function openLightbox(element) {
             const img = element.querySelector('img');
-            const lightboxImage = document.getElementById('lightboxImage');
-            if (img && lightboxImage) {
-                lightboxImage.src = img.src;
+            if (img) {
+                const src = img.src;
+                currentImageIndex = carouselImages.indexOf(src);
+                updateLightboxImage();
+
                 const lightboxModal = new bootstrap.Modal(document.getElementById('lightboxModal'));
                 lightboxModal.show();
+            }
+        }
+
+        function navigateLightbox(direction) {
+            currentImageIndex += direction;
+            if (currentImageIndex >= carouselImages.length) {
+                currentImageIndex = 0;
+            } else if (currentImageIndex < 0) {
+                currentImageIndex = carouselImages.length - 1;
+            }
+            updateLightboxImage();
+        }
+
+        function updateLightboxImage() {
+            const lightboxImage = document.getElementById('lightboxImage');
+            if (lightboxImage) {
+                lightboxImage.src = carouselImages[currentImageIndex];
             }
         }
 

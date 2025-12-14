@@ -21,9 +21,13 @@ def leer_mensajes():
     return mensajes
 
 def guardar_mensaje(nombre, mensaje):
-    """Guarda un nuevo mensaje en el archivo CSV"""
+    """Guarda un nuevo mensaje en el archivo CSV y devuelve la fecha"""
     archivo_existe = os.path.isfile(ARCHIVO_MENSAJES)
     
+    # Agregar 2 horas a la hora actual
+    fecha_actualizada = datetime.now() + timedelta(hours=2)
+    fecha_str = fecha_actualizada.strftime('%d/%m/%Y - %H:%M:%S')
+
     with open(ARCHIVO_MENSAJES, 'a', newline='', encoding='utf-8') as archivo:
         campos = ['nombre', 'mensaje', 'fecha']
         escritor = csv.DictWriter(archivo, fieldnames=campos)
@@ -31,14 +35,12 @@ def guardar_mensaje(nombre, mensaje):
         if not archivo_existe:
             escritor.writeheader()
             
-        # Agregar 2 horas a la hora actual
-        fecha_actualizada = datetime.now() + timedelta(hours=2)
-        
         escritor.writerow({
             'nombre': nombre,
             'mensaje': mensaje,
-            'fecha': fecha_actualizada.strftime('%d/%m/%Y - %H:%M:%S')
+            'fecha': fecha_str
         })
+    return fecha_str
 
 @app.route('/')
 def index():
@@ -55,9 +57,10 @@ def agregar_mensaje():
     mensaje_texto = request.form.get('mensaje')
     
     if nombre and mensaje_texto:
-        guardar_mensaje(nombre, mensaje_texto)
+        fecha = guardar_mensaje(nombre, mensaje_texto)
+        return jsonify({'success': True, 'nombre': nombre, 'mensaje': mensaje_texto, 'fecha': fecha})
     
-    return redirect('/')
+    return jsonify({'success': False})
 
 @app.route('/borrar-mensaje', methods=['POST']) 
 def borrar_mensaje():
@@ -65,7 +68,7 @@ def borrar_mensaje():
     try:
         nombre_a_borrar = request.form.get('nombre') 
         if not nombre_a_borrar:
-            return redirect('/')
+            return jsonify({'success': False})
             
         mensajes = leer_mensajes()
 
@@ -80,11 +83,11 @@ def borrar_mensaje():
                 escritor.writeheader()
                 escritor.writerows(mensajes_actualizados)
 
-        return redirect('/')
+        return jsonify({'success': True})
     
     except Exception as e:
         print(f"Error al borrar mensaje: {e}")
-        return redirect('/')
+        return jsonify({'success': False})
 
 @app.route('/editar-mensaje', methods=['POST'])
 def editar_mensaje():
@@ -95,7 +98,7 @@ def editar_mensaje():
         mensaje_nuevo = request.form.get('mensaje')
         
         if not nombre_original or not nombre_nuevo or not mensaje_nuevo:
-            return redirect('/')
+             return jsonify({'success': False})
             
         mensajes = leer_mensajes()
         mensajes_actualizados = []
@@ -118,10 +121,10 @@ def editar_mensaje():
                 escritor.writeheader()
                 escritor.writerows(mensajes_actualizados)
                 
-        return redirect('/')
+        return jsonify({'success': True, 'nombre': nombre_nuevo, 'mensaje': mensaje_nuevo})
     except Exception as e:
         print(f"Error al editar mensaje: {e}")
-        return redirect('/')
+        return jsonify({'success': False})
 
 if __name__ == '__main__':
     app.run(debug=True)
